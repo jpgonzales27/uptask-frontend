@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ProjectForm from "@/components/projects/ProjectForm";
 import { ProjectFormData } from "@/types/index";
 import { createProject } from "@/api/ProjectAPI";
+import { toast } from "react-toastify";
 
 export default function CreateProjectView() {
+  const navigate = useNavigate();
+
   const initialValues: ProjectFormData = {
     projectName: "",
     clientName: "",
@@ -17,8 +20,10 @@ export default function CreateProjectView() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
-  const handleForm = (formData: ProjectFormData) => {
-    createProject(formData);
+  const handleForm = async (formData: ProjectFormData) => {
+    const data = await createProject(formData);
+    toast.success(data);
+    navigate("/");
   };
 
   return (
