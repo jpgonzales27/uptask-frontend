@@ -21,7 +21,7 @@ export default function CreateProjectView() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
-  const mutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: createProject,
     onError: () => {},
     onSuccess: (data) => {
@@ -36,9 +36,7 @@ export default function CreateProjectView() {
   //   navigate("/");
   // };
 
-  const handleForm = async (formData: ProjectFormData) => {
-    await mutation.mutateAsync(formData);
-  };
+  const handleForm = async (formData: ProjectFormData) => mutate(formData);
 
   return (
     <>
