@@ -1,4 +1,5 @@
 import { getProjectById } from "@/api/ProjectAPI";
+import AddTaskModal from "@/components/task/AddTaskModal";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
@@ -39,6 +40,7 @@ export default function ProjectDetailsView() {
             Colaboradores
           </Link>
         </nav>
+        <AddTaskModal />
       </>
     );
 }
