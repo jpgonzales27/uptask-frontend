@@ -1,5 +1,6 @@
 import { getFullProject } from "@/api/ProjectAPI";
 import AddTaskModal from "@/components/task/AddTaskModal";
+import EditTaskData from "@/components/task/EditTaskData";
 import TaskList from "@/components/task/TaskList";
 // import TaskList from "@/components/task/TaskList";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +20,6 @@ export default function ProjectDetailsView() {
 
   if (isError) return <Navigate to={"/404"} />;
   if (isLoading) return "Cargando....";
-  console.log("DATA PROJECT DETAILS: ", data);
   if (data)
     return (
       <>
@@ -43,6 +43,7 @@ export default function ProjectDetailsView() {
         </nav>
         <TaskList tasks={data.tasks} />
         <AddTaskModal />
+        <EditTaskData />
       </>
     );
 }
