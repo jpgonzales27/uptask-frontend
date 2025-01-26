@@ -13,7 +13,7 @@ export default function ProjectDetailsView() {
   const projectId = params.projectId!;
 
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["editProject", projectId],
+    queryKey: ["project", projectId],
     queryFn: () => getFullProject(projectId),
     retry: false,
   });
