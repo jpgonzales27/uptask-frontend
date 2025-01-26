@@ -1,5 +1,7 @@
-import { getProjectById } from "@/api/ProjectAPI";
+import { getFullProject } from "@/api/ProjectAPI";
 import AddTaskModal from "@/components/task/AddTaskModal";
+import TaskList from "@/components/task/TaskList";
+// import TaskList from "@/components/task/TaskList";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
@@ -11,13 +13,13 @@ export default function ProjectDetailsView() {
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["editProject", projectId],
-    queryFn: () => getProjectById(projectId),
+    queryFn: () => getFullProject(projectId),
     retry: false,
   });
 
   if (isError) return <Navigate to={"/404"} />;
   if (isLoading) return "Cargando....";
-
+  console.log("DATA PROJECT DETAILS: ", data);
   if (data)
     return (
       <>
@@ -39,6 +41,7 @@ export default function ProjectDetailsView() {
             Colaboradores
           </Link>
         </nav>
+        <TaskList tasks={data.tasks} />
         <AddTaskModal />
       </>
     );
